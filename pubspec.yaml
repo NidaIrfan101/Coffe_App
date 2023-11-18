@@ -35,6 +35,8 @@ dependencies:
   image_picker:
   cloud_firestore:
   firebase_storage:
+  shared_preferences:
+
 
 
 

@@ -4,45 +4,25 @@ import 'package:coffeshop_app/register_screen.dart';
 import 'package:coffeshop_app/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'coffe.dart';
 import 'main.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-int selectedIndex = 0;
 
-void pageShifter(index){
-  setState(() {
-    selectedIndex=index;
-  });
-}
 List<Widget>myScreens=[HomeScreen(),LoginScreen(),RegisterScreen(),SplashScreen()];
 List icon=[Icon(Icons.coffee)];
 
-  List categories=["Cappucino","Frappuccino","Espresso","ColdBrew","HotBrew","Latte"];
+  List categories=["ColdBrew","HotBrew"];
 
   int currentIndex = 0;
 
-
-   List<Map<String, dynamic>> Data=[
-    {'names':'Espresso Macchiato',  'price': '5.13' , 'images': 'https://www.nims.it/nims2.xtro.it/repository/1/4/8745/10267/71050/88388/88389/ita-88390.jpg',
-      'descrip': 'with choclate","with steamed milk","with low fat cold milk","with cinaamon aroma'
-},
-   {'names':'Caffe Mocha',  'price': '7.89', 'images': 'https://imhungryforthat.com/wp-content/uploads/2022/10/cafe-mocha.jpg',
-     'descrip': 'with choclate","with steamed milk","with low fat cold milk","with cinaamon aroma'},
-    {'names':'Vanilla Shaken Brew',  'price': '4.00', 'images': 'https://copykat.com/wp-content/uploads/2021/08/Starbucks-Vanilla-Sweet-Cream-Cold-Brew-Pin-1-1024x1536.jpg',
-       'descrip': 'with choclate","with steamed milk","with low fat cold milk","with cinaamon aroma'
-     },
-     {'names':'Vanilla Shaken Brew',  'price': '4.00', 'images': 'https://copykat.com/wp-content/uploads/2021/08/Starbucks-Vanilla-Sweet-Cream-Cold-Brew-Pin-1-1024x1536.jpg',
-      'descrip': 'with choclate","with steamed milk","with low fat cold milk","with cinaamon aroma'
-     },
-
-   ];
 
 
 
@@ -72,7 +52,10 @@ List icon=[Icon(Icons.coffee)];
   "One Hot Choclate With Ginger Cookie",
   "3 Frappe of your Own choice In Price of 2"];
 
-
+List<Widget> screens= [
+  HotBrew(),
+  ColdBrew()
+];
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +73,7 @@ List icon=[Icon(Icons.coffee)];
                 CircleAvatar(
                   radius: 30,
                   backgroundColor: Colors.lime,
+                  backgroundImage: NetworkImage(""),
                 ),
 
                 SizedBox(width: 90), // give it width
@@ -244,78 +228,12 @@ List icon=[Icon(Icons.coffee)];
 
              //Filter boxes//
 
-             Column(children: [
-               Container(
-                margin: EdgeInsets.only(left: 20),
-              ),
-              GridView.count(
-                  crossAxisCount: 2,
-              scrollDirection: Axis.vertical,
-                  physics: const ScrollPhysics(),
-                 mainAxisSpacing: 10,
-                 crossAxisSpacing: 10,
-                  shrinkWrap: true,
-                  childAspectRatio: 140/200,
-                  children: List.generate(Data.length,(index) => Stack(
-                    children: [
-                      Container(
-                       width: 350,
-                       height: double.infinity,
-                       decoration: BoxDecoration(
-                           borderRadius:
-                           BorderRadius.circular(20),
-                           border:
-                           Border.all(color: Colors.grey.shade400),
-                             color: Colors.grey.shade300),
-                      ),
-                     Column(
-                        children: [
-                         Container(
-              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                            height: 150,
-                            decoration: BoxDecoration(
-                                borderRadius:
-                               BorderRadius.circular(20),
-                               color: Colors.white,
-                               image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage("${Data[currentIndex]['images']}"))),
-                           ),
-
-                         SizedBox(width: 10,),
-                         Container(
-                          margin: EdgeInsets.only(left: 14),
-                           child: Column(
-                             children: [
-                               Text("${Data[currentIndex]['names']}",
-                                 style: TextStyle(
-                                     fontSize: 16,
-                                     fontWeight:
-                                     FontWeight.w700),
-                               ),
-
-
-
-                               Container(decoration: BoxDecoration(
-                                       color: Colors.deepPurple,
-                                       borderRadius: BorderRadius.circular(30)
-                                  ),
-                                  margin: EdgeInsets.only(left: 80),
-                                   child: new IconButton(
-                                       icon: new Icon(Icons.add,color: Colors.white,),onPressed: null),
-                               ),
-                            ],
-                            crossAxisAlignment:CrossAxisAlignment.start,
-                          ),
-                          )
-                        ],
-                      )
-                     ],
-                   )))
-             ],
-            ),
 
             SizedBox(height: 10,),
+
+            screens[currentIndex],
+
+
 
 //heading//
             Container(
@@ -391,7 +309,7 @@ List icon=[Icon(Icons.coffee)];
 
                                 GestureDetector(
                                   onTap: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => DescriptionScreen(image:Recomended_images[index], name: Recomended_names[index], smalldescription: Recomended_descrip[index])));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => DescriptionScreen(image:Recomended_images[index], name: Recomended_names[index], smalldescription: Recomended_descrip[index],price:Recomended_price[index])));
                                   },
                                   child: Container(
 
@@ -489,7 +407,7 @@ List icon=[Icon(Icons.coffee)];
 
                             IconButton(
                                 icon: Icon(Icons.keyboard_double_arrow_right,color: Colors.deepPurple,size:18.0),onPressed: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => DescriptionScreen(image:offer_images[index], name: offer_description[index], smalldescription: Recomended_descrip[index])));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => DescriptionScreen(image:offer_images[index], name: offer_description[index], smalldescription: Recomended_descrip[index],price:Recomended_price[index])));
 
                             }),
 
@@ -507,45 +425,9 @@ List icon=[Icon(Icons.coffee)];
           ],
         ),
       ),
-    bottomNavigationBar: ClipRRect(
-    borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0), ),
-    child:BottomNavigationBar(
-    //elevation: 0.0,
-    type: BottomNavigationBarType.fixed,
-    backgroundColor: Colors.grey.shade200,
-     currentIndex: selectedIndex,
-      showSelectedLabels: true,
-      showUnselectedLabels: true,
-      selectedItemColor: Colors.black,
-        onTap: pageShifter,
-        unselectedItemColor: Colors.deepPurple,
-        items: [
 
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home,color: Colors.black,size: 35.0,),
-                  label: "Home"
-          ),
-
-          BottomNavigationBarItem(
-              icon: Icon(Icons.login,color: Colors.black,size: 35.0,),
-              label: "LogIn"
-          ),
-
-          BottomNavigationBarItem(
-              icon: Icon(Icons.logout,color: Colors.black,size: 35.0,),
-              label: "LogOut"
-          ),
-
-          BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart_outlined,color: Colors.black,size: 35.0,),
-              label: "Cart"
-          ),
-
-        ],
-
-      ),
-
-    )
     );
   }
 }
+
+
