@@ -114,7 +114,7 @@ class _profilescreenState extends State<profilescreen> {
                                       SizedBox(
                                         width: 120, height: 120,
 
-                                        child: ClipRRect(borderRadius: BorderRadius.circular(100),child: Image(image: NetworkImage(""))
+                                        child: ClipRRect(borderRadius: BorderRadius.circular(100),child: Image(image: NetworkImage('$userImage'))
                                         ),
                                       ),
                                       Positioned(
