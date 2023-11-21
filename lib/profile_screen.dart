@@ -47,7 +47,7 @@ class _profilescreenState extends State<profilescreen> {
           physics: const ScrollPhysics(),
           child: Column(
             children: [
-              SizedBox(height: 20,),
+              SizedBox(height: 22,),
 
               StreamBuilder(
                   stream: FirebaseFirestore.instance.collection("userData").where('email',isEqualTo: uEmail).snapshots(),
