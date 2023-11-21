@@ -129,7 +129,7 @@ class ColdBrew extends StatelessWidget {
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
           shrinkWrap: true,
-          childAspectRatio: 140/200,
+          childAspectRatio: 140/165,
           children: List.generate(names.length,(index) => Stack(
             children: [
               Container(
@@ -140,7 +140,7 @@ class ColdBrew extends StatelessWidget {
                     BorderRadius.circular(20),
                     border:
                     Border.all(color: Colors.grey.shade400),
-                    color: Colors.grey.shade300),
+                    color: Colors.grey.shade100),
               ),
               Column(
                 children: [
@@ -171,12 +171,12 @@ class ColdBrew extends StatelessWidget {
 
 
                         Container(decoration: BoxDecoration(
-                            color: Colors.deepPurple,
+                            color: Colors.deepPurple.withOpacity(0.10),
                             borderRadius: BorderRadius.circular(30)
                         ),
                           margin: EdgeInsets.only(left: 80),
                           child: new IconButton(
-                              icon: new Icon(Icons.add,color: Colors.white,),onPressed: null),
+                              icon: new Icon(Icons.add,color: Colors.deepPurple, size: 9,),onPressed: null),
                         ),
                       ],
                       crossAxisAlignment:CrossAxisAlignment.start,

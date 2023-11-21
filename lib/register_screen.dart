@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'loginscreen.dart';
@@ -26,40 +27,44 @@ TextEditingController email=TextEditingController();
 TextEditingController pass =TextEditingController();
 TextEditingController age=TextEditingController();
 
-void InsertUser ()async{
-
-}
-void userInsertwithImage()async{
-  UploadTask uploadTask = FirebaseStorage.instance.ref().child("Images").child(Uuid().v1()).putFile(userProfile!);
-  TaskSnapshot taskSnapshot = await uploadTask;
-  String downloadURL = await taskSnapshot.ref.getDownloadURL();
-  UserInsert(imageURL: downloadURL);
-}
 
 
-String userID = Uuid().v1();
-void UserInsert({String? imageURL})async{
-
-  Map<String , dynamic> userDetails ={
-    "userId":userID,
-    "user-image":imageURL,
-    "name":name.text.toString(),
-    "age":age.text.toString(),
-    "email":email.text.toString(),
-    "pass":pass.text.toString(),
-  };
-
-  // await FirebaseFirestore.instance.collection("userData").add(userDetails);
-  await FirebaseFirestore.instance.collection("userData").doc(userID).set(userDetails);
-
-
-
-}
-File? userProfile;
 
 var _formkey =GlobalKey<FormState>();
 
 class _RegisterScreenState extends State<RegisterScreen> {
+
+  void userInsertwithImage()async{
+    UploadTask uploadTask = FirebaseStorage.instance.ref().child("Images").child(Uuid().v1()).putFile(userProfile!);
+    TaskSnapshot taskSnapshot = await uploadTask;
+    String downloadURL = await taskSnapshot.ref.getDownloadURL();
+    UserInsert(imageURL: downloadURL);
+  }
+
+  String userID = Uuid().v1();
+  void UserInsert({String? imageURL})async{
+
+    Map<String , dynamic> userDetails ={
+      "userId":userID,
+      "user-image":imageURL,
+      "name":name.text.toString(),
+      "age":age.text.toString(),
+      "email":email.text.toString(),
+      "pass":pass.text.toString(),
+    };
+    try{
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email.text.toString(), password: pass.text.toString());
+      await FirebaseFirestore.instance.collection("userData").doc(userID).set(userDetails);
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen(),));
+    } on FirebaseAuthException catch(ex){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("${ex.code.toString()}")));
+    }
+    // await FirebaseFirestore.instance.collection("userData").add(userDetails);
+
+
+  }
+  File? userProfile;
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -234,13 +239,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ElevatedButton(onPressed: (){
 
                       userInsertwithImage();
-
-                      Navigator.push(context,MaterialPageRoute(builder: (context)=> LoginScreen(),));
-
-                      name.clear();
-                      email.clear();
-                      pass.clear();
-                      age.clear();
 
                     }, child: Text("Register User")),
                     SizedBox(height: 30,),

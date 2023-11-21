@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'main.dart';
 import 'package:coffeshop_app/register_screen.dart';
 import 'homescreen.dart';
@@ -26,9 +27,9 @@ class _LoginScreenState extends State<LoginScreen> {
   void UserLogin()async{
     try{
       await FirebaseAuth.instance.signInWithEmailAndPassword(email: email.text.toString(), password: pass.text.toString());
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen(),));
-      // SharedPreferences userlogindetails = await SharedPreferences.getInstance();
-      // userlogindetails.setBool("userlogindetails", true);
+      SharedPreferences userEmail = await SharedPreferences.getInstance();
+      userEmail.setString("uEmail", email.text.toString());
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>bottomnav(),));
     } on FirebaseAuthException catch(ex){
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("${ex.code.toString()}")));
     }
@@ -146,11 +147,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             content: Text("Login Successfull"),
                             actions: [
                               ElevatedButton(onPressed:(){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
-
+                                 UserLogin();
                               }, child: Text("login")),
                               OutlinedButton(onPressed:(){
-                                UserLogin();
+
                                 Navigator.pop(context);
                                 email.clear();
                                 pass.clear();

@@ -209,7 +209,8 @@ List<Widget> screens= [
                             ),
                               child:Row(
                                 children: [
-                                  Text(categories[index]),
+                                  Text(categories[index],style: GoogleFonts.poppins(fontWeight: FontWeight.w500,
+                                  fontSize: 15),),
                                 ],
                               ),
 
@@ -414,6 +415,7 @@ List<Widget> screens= [
                           ],
                         ),
                       ),
+
                     ]
                 )
             )
