@@ -279,27 +279,35 @@ class _profilescreenState extends State<profilescreen> {
 
                                   SizedBox(height: 10,),
 
-                                  ListTile(
-                                    leading: Container(
-                                      width: 40,height: 40,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(100),
-                                          color: Colors.black.withOpacity(0.1)
+                                  GestureDetector(
+                                    onTap: ()async{
+                                      SharedPreferences userEmail = await SharedPreferences.getInstance();
+                                      userEmail.setBool("UserLoggedIn",false);
+                                      userEmail.setString("uEmail",'');
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => bottomnav(),));
+                                    },
+                                    child: ListTile(
+                                      leading: Container(
+                                        width: 40,height: 40,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(100),
+                                            color: Colors.black.withOpacity(0.1)
+                                        ),
+                                        child: const Icon(Icons.logout,color: Colors.black,),
                                       ),
-                                      child: const Icon(Icons.logout,color: Colors.black,),
-                                    ),
-                                    title: Text("LogOut",style: GoogleFonts.poppins(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.red
-                                    ),),
-                                    trailing:Container(
-                                      width: 30,height: 30,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(100),
-                                          color: Colors.black.withOpacity(0.1)
+                                      title: Text("LogOut",style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.red
+                                      ),),
+                                      trailing:Container(
+                                        width: 30,height: 30,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(100),
+                                            color: Colors.black.withOpacity(0.1)
+                                        ),
+                                        child: const Icon(Icons.arrow_right_alt,color: Colors.black,),
                                       ),
-                                      child: const Icon(Icons.arrow_right_alt,color: Colors.black,),
                                     ),
                                   ),
 

@@ -1,5 +1,6 @@
 import 'package:coffeshop_app/description%20screen.dart';
 import 'package:coffeshop_app/loginscreen.dart';
+import 'package:coffeshop_app/profile_screen.dart';
 import 'package:coffeshop_app/register_screen.dart';
 import 'package:coffeshop_app/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-List<Widget>myScreens=[HomeScreen(),LoginScreen(),RegisterScreen(),SplashScreen()];
+
 List icon=[Icon(Icons.coffee)];
 
   List categories=["ColdBrew","HotBrew"];
@@ -235,110 +236,110 @@ List<Widget> screens= [
             screens[currentIndex],
 
 
+//
+// //heading//
+//             Container(
+//               margin:EdgeInsets.only(right: 180),
+//               child: Column(
+//                 children: [
+//                   Text("Recommended", style: GoogleFonts.poppins(
+//                     fontWeight: FontWeight.w600,
+//                     fontSize: 25,
+//                   )),
+//                 ],
+//               ),
+//             ),
+//
+//             SizedBox(height: 5,),
 
-//heading//
-            Container(
-              margin:EdgeInsets.only(right: 180),
-              child: Column(
-                children: [
-                  Text("Recommended", style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 25,
-                  )),
-                ],
-              ),
-            ),
+            // //RECOMENDATIONS//
+            //
+            // Column(
+            //   children: [
+            //     Container(
+            //       margin: EdgeInsets.only(left: 20),
+            //     ),
+            //     GridView.count(
+            //       crossAxisCount: 2,
+            //       scrollDirection: Axis.vertical,
+            //       physics: const ScrollPhysics(),
+            //       mainAxisSpacing: 10,
+            //       crossAxisSpacing: 10,
+            //       shrinkWrap: true,
+            //       childAspectRatio: 140/300,
+            //       children: List.generate(Recomended_images.length, (index) => Stack(
+            //         children: [
+            //           Container(
+            //             width: double.infinity,
+            //             height: 330,
+            //             decoration: BoxDecoration(
+            //                 borderRadius: BorderRadius.circular(20),
+            //                 border: Border.all(color: Colors.grey.shade400),
+            //                 color:Colors.grey.shade300),
+            //           ),
+            //           Column(
+            //             children: [
+            //               Container(
+            //                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            //                 width: 300,
+            //                 height: 200,
+            //                 decoration: BoxDecoration(
+            //                     borderRadius: BorderRadius.circular(20),
+            //                     color: Colors.lime,
+            //                     image: DecorationImage(
+            //                         fit: BoxFit.cover,
+            //                         image: NetworkImage("${Recomended_images[index]}"))),
+            //               ),
+            //               SizedBox(width: 10,),
+            //               Container(
+            //                 margin: EdgeInsets.only(left: 14),
+            //                 child:Column(
+            //                   children: [
+            //                     Text("${Recomended_names[index]}",style: GoogleFonts.poppins(
+            //                         fontSize: 14,
+            //                         fontWeight: FontWeight.w700
+            //                     ),),
+            //                     Text("${Recomended_descrip[index]}",style: GoogleFonts.poppins(
+            //                         fontSize: 14,
+            //                         fontWeight: FontWeight.w500
+            //                     ),),
+            //
+            //                     Text("${Recomended_price[index]}",style: GoogleFonts.poppins(
+            //                         fontSize: 15,
+            //                         fontWeight: FontWeight.w800
+            //                     ),),
+            //
+            //                     GestureDetector(
+            //                       onTap: (){
+            //                         Navigator.push(context, MaterialPageRoute(builder: (context) => DescriptionScreen(image:Recomended_images[index], name: Recomended_names[index], smalldescription: Recomended_descrip[index],price:Recomended_price[index])));
+            //                       },
+            //                       child: Container(
+            //
+            //                         padding: EdgeInsets.only(),
+            //                         decoration: BoxDecoration(
+            //                             color: Colors.deepPurple,
+            //                             borderRadius: BorderRadius.circular(30)
+            //                         ),
+            //                         margin: EdgeInsets.only(left: 90,bottom: 40),
+            //                         child: new IconButton(
+            //                             icon: new Icon(Icons.add,color: Colors.white,),onPressed: null),
+            //                       ),
+            //                     ),
+            //
+            //                   ],
+            //
+            //                   crossAxisAlignment: CrossAxisAlignment.start,
+            //                 ),
+            //               )
+            //             ],
+            //           )
+            //         ],
+            //       )),
+            //     )
+            //   ],
+            // ),
 
-            SizedBox(height: 5,),
-
-            //RECOMENDATIONS//
-
-            Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(left: 20),
-                ),
-                GridView.count(
-                  crossAxisCount: 2,
-                  scrollDirection: Axis.vertical,
-                  physics: const ScrollPhysics(),
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  shrinkWrap: true,
-                  childAspectRatio: 140/300,
-                  children: List.generate(Recomended_images.length, (index) => Stack(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        height: 330,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: Colors.grey.shade400),
-                            color:Colors.grey.shade300),
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                            width: 300,
-                            height: 200,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.lime,
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage("${Recomended_images[index]}"))),
-                          ),
-                          SizedBox(width: 10,),
-                          Container(
-                            margin: EdgeInsets.only(left: 14),
-                            child:Column(
-                              children: [
-                                Text("${Recomended_names[index]}",style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700
-                                ),),
-                                Text("${Recomended_descrip[index]}",style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500
-                                ),),
-
-                                Text("${Recomended_price[index]}",style: GoogleFonts.poppins(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w800
-                                ),),
-
-                                GestureDetector(
-                                  onTap: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => DescriptionScreen(image:Recomended_images[index], name: Recomended_names[index], smalldescription: Recomended_descrip[index],price:Recomended_price[index])));
-                                  },
-                                  child: Container(
-
-                                    padding: EdgeInsets.only(),
-                                    decoration: BoxDecoration(
-                                        color: Colors.deepPurple,
-                                        borderRadius: BorderRadius.circular(30)
-                                    ),
-                                    margin: EdgeInsets.only(left: 90,bottom: 40),
-                                    child: new IconButton(
-                                        icon: new Icon(Icons.add,color: Colors.white,),onPressed: null),
-                                  ),
-                                ),
-
-                              ],
-
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  )),
-                )
-              ],
-            ),
-
-            SizedBox(height: 10,),
+            SizedBox(height: 40,),
 
 
 
@@ -354,6 +355,9 @@ List<Widget> screens= [
                 ],
               ),
             ),
+
+
+            SizedBox(height: 20,),
 
             //Special offer//
             Column(children:

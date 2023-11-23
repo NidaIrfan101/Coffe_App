@@ -28,6 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
     try{
       await FirebaseAuth.instance.signInWithEmailAndPassword(email: email.text.toString(), password: pass.text.toString());
       SharedPreferences userEmail = await SharedPreferences.getInstance();
+      userEmail.setBool("UserLoggedIn", true);
       userEmail.setString("uEmail", email.text.toString());
       Navigator.push(context, MaterialPageRoute(builder: (context)=>bottomnav(),));
     } on FirebaseAuthException catch(ex){
